@@ -1,32 +1,86 @@
 <?php
 
 namespace StudentManagement;
-
+require_once 'students.php' ;
 use student\students;
 
 class StudentManagement
 {
-    public $allstudents = [] ;
-
-    public function displayAll()
+    public static $allstudents = array() ;
+    public static function deleteOne($ID)
     {
-        $allstudents = $this->allstudents ;
+        $allstudents = self::$allstudents ;
         foreach ($allstudents as $index => $valeu) {
-            return "student {$index['ID']} : {$index['FirstName']} {$index['LastName']} , {$index['Age']}";
+            $eachstudent = $allstudents[$index] ;
+            echo '</br>';
+            foreach ($eachstudent as $index2 => $valeu2) {
+                if ($valeu2['FirstName'] == $ID){
+                    unset($eachstudent[$index2]);
+
+
+
+                }
+
+            }
+
+        }}
+    public static function displayAll()
+    {
+        $allstudents = self::$allstudents ;
+        foreach ($allstudents as $index => $valeu) {
+            $eachstudent = $allstudents[$index] ;
+            echo '</br>';
+            foreach ($eachstudent as $index2 => $valeu2) {
+                $eachstudent1 = $eachstudent[$index2] ;
+                foreach ($eachstudent1 as $index3 => $valeu3) {
+                    echo $eachstudent1[$index3] ;
+
+                }
+            }
         }
+
+    }
+    public static function displayOne($prop , $val)
+    {
+        $allstudents = self::$allstudents ;
+        foreach ($allstudents as $index => $valeu) {
+            $eachstudent = $allstudents[$index] ;
+            echo '</br>';
+            foreach ($eachstudent as $index2 => $valeu2) {
+                $eachstudent1 = $eachstudent[$index2] ;
+                foreach ($eachstudent1 as $index3 => $valeu3) {
+                    if ($eachstudent1[$prop] == $val) {
+                    echo $eachstudent1[$index3] ;
+
+                }
+            }}
+        }
+
     }
 
-    public function add($FirstName , $LastName , $Age)
+
+
+    public static function deleteAll()
     {
-        $student = new students() ;
-        $student->Firstname = $FirstName ;
-        $student->LastName = $LastName ;
-        $student->Age = $Age ;
-        $studentsinfo = array(
-            'FirstName' => $student->Firstname ,
-            'LastName'  => $student->LastName  ,
-            'Age'       => $student->Age ,
-            'ID'       => $student::$ID
-    );
+        self::$allstudents = [];
+    }
+
+    public static function add($FirstName , $LastName , $Age)
+    {
+        students::$Firstname = $FirstName ;
+        students::$LastName = $LastName ;
+        students::$Age = $Age ;
+        self::$allstudents[] = [
+            'student' =>
+                [
+            'FirstName' => $FirstName ,
+            'LastName'  => $LastName  ,
+            'Age'       => $Age ,
+            'ID'       => students::$ID
+                ]
+
+    ];
+
+
     }
 }

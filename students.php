@@ -4,19 +4,23 @@ namespace student;
 
 class students
 {
-    public $Firstname ;
-    public $LastName ;
-    public $Age ;
+    public static $Firstname ;
+    public static $LastName ;
+    public static $Age ;
     public static $ID = 0 ;
 
     public function __construct()
     {
         self::$ID++ ;
+
     }
 
-    public function displayInfo()
+    public static function displayInfo()
     {
-        return "FirstName : {$this->Firstname} LastName : {$this->LastName} Age : {$this->Age}";
+        $fa = self::$Firstname ;
+        $la = self::$LastName ;
+        $ag = self::$Age ;
+        echo "FirstName : {$fa} LastName : {$la} Age : {$ag}";
     }
 
 }
